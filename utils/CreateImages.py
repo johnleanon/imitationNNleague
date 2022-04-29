@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-data = np.load("../data/training_dataGC.npy", allow_pickle=True)
-targets = np.load("../data/target_dataGC.npy", allow_pickle=True)
+data = np.load("D:\sus/training_data.npy", allow_pickle=True)
+targets = np.load("D:\sussy/target_data.npy", allow_pickle=True)
 
 print(f'Image Data Shape: {data.shape}')
 print(f'targets Shape: {targets.shape}')
@@ -18,22 +18,26 @@ holder_list = []
 for i, image in enumerate(data):
     holder_list.append([data[i], targets[i]])
 
-count_up = 0
-count_left = 0
-count_right = 0
-count_jump = 0
+count_W = 0
+count_A = 0
+count_S = 0
+count_D = 0
+count_Nothing = 0
 
 for data in holder_list:
     #print(data[1])
     if data[1] == 'W':
-        count_up += 1
-        cv2.imwrite(f"E:/GC/Nothing/H7-u{count_up}.png", data[0])
+        count_W += 1
+        cv2.imwrite(f"D:/GC/W/H7-u{count_W}.png", data[0])
     elif data[1] == 'A':
-        count_left += 1
-        cv2.imwrite(f"E:/GC/Left/H7-l{count_left}.png", data[0])
+        count_A += 1
+        cv2.imwrite(f"D:/GC/A/H7-l{count_A}.png", data[0])
     elif data[1] == 'D':
-        count_right += 1
-        cv2.imwrite(f"E:/GC/Right/H7-r{count_right}.png", data[0])
-    elif data[1] == ' ':
-        count_jump += 1
-        cv2.imwrite(f"E:/GC/Jump/H7-j{count_jump}.png", data[0])
+        count_S += 1
+        cv2.imwrite(f"D:/GC/S/H7-r{count_S}.png", data[0])
+    elif data[1] == 'D':
+        count_D += 1
+        cv2.imwrite(f"D:/GC/D/H7-j{count_D}.png", data[0])
+    elif data[1] == '':
+        count_Nothing += 1
+        cv2.imwrite(f"D:/GC/Nothing/H7-j{count_Nothing}.png", data[0])

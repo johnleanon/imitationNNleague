@@ -6,11 +6,13 @@ import os
 from utils.grabscreen import grab_screen
 from utils.getkeys import key_check
 
+
 file_name = "D:\sus/training_data.npy"
 file_name2 = "D:\sussy/target_data.npy"
 
 
 def get_data():
+
     if os.path.isfile(file_name):
         print('File exists, loading previous data!')
         image_data = list(np.load(file_name, allow_pickle=True))
@@ -35,11 +37,13 @@ while True:
         print("Starting")
         break
 
+
 count = 0
 while True:
-    count += 1
+    count +=1
     last_time = time.time()
-    image = grab_screen(region=(1, 1, 1919, 1079))
+    image = grab_screen(region=(1, 1, 1920, 1080))
+
 
     image = cv2.resize(image, (224, 224))
 
@@ -56,6 +60,6 @@ while True:
     if keys == "H":
         break
 
-    print('loop took {} seconds'.format(time.time() - last_time))
+    print('loop took {} seconds'.format(time.time()-last_time))
 
 save_data(image_data, targets)

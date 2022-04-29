@@ -4,12 +4,13 @@ import win32gui, win32ui, win32con, win32api
 
 
 def grab_screen(region=None):
+
     hwin = win32gui.GetDesktopWindow()
 
     if region:
-        left, top, x2, y2 = region
-        width = x2 - left + 1
-        height = y2 - top + 1
+            left, top, x2, y2 = region
+            width = x2 - left + 1
+            height = y2 - top + 1
     else:
         width = win32api.GetSystemMetrics(win32con.SM_CXVIRTUALSCREEN)
         height = win32api.GetSystemMetrics(win32con.SM_CYVIRTUALSCREEN)
@@ -28,7 +29,7 @@ def grab_screen(region=None):
     img = np.fromstring(signedIntsArray, dtype='uint8')
     img.shape = (height, width, 4)
 
-    # cv2.imwrite("imageFULL.png", img)
+    #cv2.imwrite("imageFULL.png", img)
     srcdc.DeleteDC()
     memdc.DeleteDC()
     win32gui.ReleaseDC(hwin, hwindc)

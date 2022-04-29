@@ -19,17 +19,11 @@ def key_check():
         return 'A'
     elif 'D' in keys:
         return 'D'
-    elif ' ' in keys:
-        return ' '
-    elif 'Q' in keys:
-        return 'Q'
     elif 'W' in keys:
         return 'W'
-    elif 'E' in keys:
-        return 'E'
-    elif 'R' in keys:
-        return 'R'
-    elif 'F' in keys:
-        return 'F'
-    elif 'P' in keys:
-        return 'P'
+    elif 'S' in keys:
+        return 'S'
+    elif ' ' in keys:
+        return ' '
+    else:
+        return ''

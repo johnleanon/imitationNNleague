@@ -10,11 +10,8 @@ from utils.grabscreen import grab_screen
 from utils.directkeys import PressKey, ReleaseKey, W, D, A
 from fastai.vision.all import *
 
-
 def label_func(x): return x.parent.name
-
-
-learn_inf = load_learner("C:/Users/programmer/Desktop/FallGuys/GC.pkl")
+learn_inf = load_learner("D:\GC/export.pkl")
 print("loaded learner")
 
 # Sleep time after actions
@@ -34,45 +31,56 @@ time.sleep(sleepy)
 
 while True:
 
-    image = grab_screen(region=(50, 100, 799, 449))
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = cv2.Canny(image, threshold1=200, threshold2=300)
-    image = cv2.resize(image, (224, 224))
+    image = grab_screen(region=(1, 1, 1920, 1080))
+    image = cv2.resize(image,(84,84))
+    cv2.imshow("Fall", image)
     # cv2.imshow("Fall", image)
     # cv2.waitKey(1)
     start_time = time.time()
     result = learn_inf.predict(image)
     action = result[0]
-    # print(result[2][0].item(), result[2][1].item(), result[2][2].item(), result[2][3].item())
+    #print(result[2][0].item(), result[2][1].item(), result[2][2].item(), result[2][3].item())
 
-    # action = random.randint(0,3)
-
-    if action == "Jump" or result[2][0] > .1:
-        print(f"JUMP! - {result[1]}")
-        keyboard.press("space")
+    #action = random.randint(0,3)
+    
+    if action == "W" or result[2][0]>.1:
+        print(f"W! - {result[1]}")
+        keyboard.press("w")
         keyboard.release("a")
         keyboard.release("d")
+        keyboard.release("s")
         time.sleep(sleepy)
 
     if action == "Nothing":
-        # print("Doing nothing....")
+        #print("Doing nothing....")
+        keyboard.release("w")
         keyboard.release("a")
         keyboard.release("d")
-        keyboard.release("space")
+        keyboard.release("s")
         time.sleep(sleepy)
 
-    elif action == "Left":
-        print(f"LEFT! - {result[1]}")
+    elif action == "A":
+        print(f"A! - {result[1]}")
         keyboard.press("a")
+        keyboard.release("w")
         keyboard.release("d")
-        keyboard.release("space")
+        keyboard.release("s")
         time.sleep(sleepy)
 
-    elif action == "Right":
-        print(f"Right! - {result[1]}")
-        keyboard.press("d")
+    elif action == "S":
+        print(f"S! - {result[1]}")
+        keyboard.press("s")
+        keyboard.release("w")
+        keyboard.release("d")
         keyboard.release("a")
-        keyboard.release("space")
+        time.sleep(sleepy)
+
+    elif action == "D":
+        print(f"D! - {result[1]}")
+        keyboard.press("d")
+        keyboard.release("w")
+        keyboard.release("s")
+        keyboard.release("a")
         time.sleep(sleepy)
 
     # End simulation by hitting h
